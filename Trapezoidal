@@ -1,0 +1,61 @@
+####   Trapezoidal method   #####
+# Configs (Please set the range and the functions to be integrated before proceeding)
+
+lower <- 1
+upper <- 2
+f <- function(x)
+{
+  m <- (1/sqrt(2*pi))
+  x <- (m*exp((-1/2)*x^2))
+}
+
+I.ex <- integrate(f,1,2)
+I.exact <- rep(0.1359051,6)
+
+# Trapezoidal Rule Function
+# Main Code
+# Finding the trapezoidal sums for different I.hat
+n = 2
+h <- (upper-lower)
+I.2 <-((h/2)*(f(lower)+f(upper)))
+
+n = 11
+h <- (upper-lower)/(n)
+j <- 1:10
+xj <- lower + j*h
+I.11 <- (h/2) * (f(lower) + 2*sum(f(xj)) + f(upper)) 
+
+n = 20
+h <- (upper-lower)/(n)
+j <- 1:19
+xj <- lower + j*h
+I.20 <- (h/2) * (f(lower) + 2*sum(f(xj)) + f(upper)) 
+
+n = 31
+h <- (upper-lower)/(n)
+j <- 1:30
+xj <- lower + j*h
+I.31 <- (h/2) * (f(lower)+ 2*sum(f(xj)) + f(upper)) 
+
+n = 40
+h <- (upper-lower)/(n)
+j <- 1:39
+xj <- lower + j*h
+I.40 <- (h/2) * (f(lower) + 2*sum(f(xj)) + f(upper)) 
+
+n = 51
+h <- (upper-lower)/(n)
+j <- 1:51
+xj <- lower + j*h
+I.51 <- (h/2) * (f(lower) + 2*sum(f(xj)) + f(upper)) 
+
+I.hat <- c(I.2,I.11,I.20,I.31,I.40,I.51)
+n <- c(2,11,20,31,40,51)
+relative.error <- abs((I.hat-I.exact)/(I.exact))
+table <- data.frame(n,I.hat,I.exact,relative.error)
+
+
+# Finding the relative errors and making a dataframe
+relative.error <- abs((I.hat-I.exact)/(I.exact))
+table <- data.frame(n,I.hat,I.exact,relative.error)
+print(table)
